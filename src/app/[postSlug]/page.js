@@ -6,7 +6,8 @@ import BlogHero from "@/components/BlogHero";
 import styles from "./postSlug.module.css";
 import { loadBlogPost } from "@/helpers/file-helpers";
 import CodeSnippet from "@/components/CodeSnippet";
-import dynamic from "next/dynamic";
+import CircularColorsDemo from "@/components/CircularColorsDemo";
+import DivisionGroupsDemo from "@/components/DivisionGroupsDemo";
 
 export async function generateMetadata({ params }) {
   const { frontmatter } = await loadBlogPost(params.postSlug);
@@ -19,9 +20,8 @@ export async function generateMetadata({ params }) {
 
 const components = {
   pre: (props) => <CodeSnippet {...props} />,
-  DivisionGroupsDemo: dynamic(() =>
-    import("../../components/DivisionGroupsDemo")
-  ),
+  DivisionGroupsDemo: DivisionGroupsDemo,
+  CircularColorsDemo: CircularColorsDemo,
 };
 
 async function BlogPost({ params }) {
