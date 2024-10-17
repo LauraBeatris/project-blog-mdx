@@ -1,0 +1,38 @@
+.wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  max-width: var(--outer-content-width);
+  margin: 0 auto;
+}
+
+.content {
+  position: relative;
+  width: 100%;
+  max-width: var(--content-width);
+  padding: var(--viewport-padding);
+  padding-top: calc(48px + 8vw);
+  padding-bottom: 64px;
+}
+
+.content h1 {
+  margin-bottom: 0.5rem;
+}
+.content p {
+  font-size: 1.125rem;
+  color: var(--color-decorative-900);
+  margin-bottom: 0px;
+  font-weight: 400;
+}
+.content time {
+  font-weight: 500;
+}
+
+@media (min-width: 35rem) {
+  .content p {
+    font-size: 1.25rem;
+  }
+}
