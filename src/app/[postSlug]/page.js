@@ -5,6 +5,7 @@ import BlogHero from "@/components/BlogHero";
 
 import styles from "./postSlug.module.css";
 import { loadBlogPost } from "@/helpers/file-helpers";
+import CodeSnippet from "@/components/CodeSnippet";
 
 export async function generateMetadata({ params }) {
   const { frontmatter } = await loadBlogPost(params.postSlug);
@@ -14,6 +15,10 @@ export async function generateMetadata({ params }) {
     description: frontmatter.abstract,
   };
 }
+
+const components = {
+  pre: (props) => <CodeSnippet {...props} />,
+};
 
 async function BlogPost({ params }) {
   const { postSlug } = params;
@@ -26,7 +31,7 @@ async function BlogPost({ params }) {
         publishedOn={frontmatter.publishedOn}
       />
       <div className={styles.page}>
-        <MDXRemote source={content} />
+        <MDXRemote source={content} components={components} />
       </div>
     </article>
   );
