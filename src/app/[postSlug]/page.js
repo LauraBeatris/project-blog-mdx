@@ -8,9 +8,16 @@ import { loadBlogPost } from "@/helpers/file-helpers";
 import CodeSnippet from "@/components/CodeSnippet";
 import CircularColorsDemo from "@/components/CircularColorsDemo";
 import DivisionGroupsDemo from "@/components/DivisionGroupsDemo";
+import { notFound } from "next/navigation";
 
 export async function generateMetadata({ params }) {
-  const { frontmatter } = await loadBlogPost(params.postSlug);
+  const blogPost = await loadBlogPost(params.postSlug);
+
+  if (!blogPost) {
+    return null;
+  }
+
+  const { frontmatter } = blogPost;
 
   return {
     title: frontmatter.title,
@@ -26,7 +33,13 @@ const components = {
 
 async function BlogPost({ params }) {
   const { postSlug } = params;
-  const { content, frontmatter } = await loadBlogPost(postSlug);
+  const blogPost = await loadBlogPost(postSlug);
+
+  if (!blogPost) {
+    notFound();
+  }
+
+  const { content, frontmatter } = blogPost;
 
   return (
     <article className={styles.wrapper}>
